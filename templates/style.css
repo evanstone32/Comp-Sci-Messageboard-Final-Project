@@ -1,0 +1,17 @@
+:root {
+
+    --dark1: #000000;
+    --purple: #7749F8;
+    --grey: #CED4DA;
+    --white: #FCFCFC;
+    background-color: #d3d3d3;
+}
+
+body {
+    background-color: var(--grey);
+}
+
+.bigButton{
+    width: 500px;
+    height: 500px;
+}
