@@ -11,6 +11,14 @@ def index():
 def list_all_movies():
     return render_template('login.html')
 
+@app.get('/SignUp')
+def sign_up():
+    return render_template('sign_up.html')
+
+@app.get('/forum')
+def forum():
+    return render_template('forum.html')
+
 
 @app.get('/posts')
 def create_movies_form():
