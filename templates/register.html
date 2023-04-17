@@ -1,0 +1,49 @@
+{% extends '_layout.html' %}
+
+{% block title %}Movie Rating App | All Movies{% endblock %}
+
+{% block body %}
+
+<div class='topical'>
+  <h1 class="mb-5">Register Page</h1>
+</div>
+
+<div class="content">
+  <form method='post' action='/profile'>
+
+    <div class="input-group" style="margin-bottom: 2rem;">
+      <span class="input-group-text">First and last name</span>
+      <input type="text" aria-label="First name" class="form-control" name="fname" id="fname">
+      <input type="text" aria-label="Last name" class="form-control" name="lname" id="lname">
+    </div>
+
+    <div class="mb-3">
+      <label for="emailInput" class="form-label">Email address</label>
+      <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="usernameInput" class="form-label">Username</label>
+      <input type="text" class="form-control" name='username' id="usernameInput" aria-describedby="emailHelp">
+    </div>
+
+
+    <div class="mb-3">
+      <label for="passwordInput" class="form-label">Password</label>
+      <input type="password" class="form-control" id="passwordInput" name="password">
+    </div>
+    <div class="mb-3">
+      <label for="passwordReenterInput" class="form-label">Re-Enter Password</label>
+      <input type="password" class="form-control" id="passwordReenterInput" name="passwordReenter">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+
+
+
+<a class='content' href="/">Go Back</a>
+
+{% endblock %}

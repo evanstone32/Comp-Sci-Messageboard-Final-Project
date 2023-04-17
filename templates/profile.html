@@ -1,0 +1,29 @@
+{% extends '_layout.html' %}
+
+{% block title %}Movie Rating App | User Profile{% endblock %}
+
+{% block body %}
+<h1 class="mb-5"></h1>
+<p class="mb-3"></p>
+
+<div class='topical'>
+  <h1 class="mb-5">User Profile</h1>
+</div>
+
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ul class="list-group w-100">
+          <li class="list-group-item"><b>
+              <h2>Username</h2>
+            </b></li>
+          <li class="list-group-item">{{user.fname}}</li>
+        </ul>
+      </div>
+
+
+    </div>
+
+
+    {% endblock %}
