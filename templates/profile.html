@@ -16,14 +16,40 @@
       <div class="col">
         <ul class="list-group w-100">
           <li class="list-group-item"><b>
-              <h2>Username</h2>
+              <h2>Full Name</h2>
             </b></li>
-          <li class="list-group-item">{{user.fname}}</li>
+          <li class="list-group-item">{{user.fname}} {{user.lname}}</li>
         </ul>
       </div>
-
-
+      <div class="col">
+        <ul class="list-group w-100">
+          <li class="list-group-item"><b>
+              <h2>Email</h2>
+            </b></li>
+          <li class="list-group-item">{{user.email}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <ul class="list-group w-100">
+          <li class="list-group-item"><b>
+              <h2>Username</h2>
+            </b></li>
+          <li class="list-group-item">{{user.username}}</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="list-group w-100">
+          <li class="list-group-item"><b>
+              <h2>User Id</h2>
+            </b></li>
+          <li class="list-group-item">{{user.user_id}}</li>
+        </ul>
+      </div>
     </div>
 
+  </div>
+</div>
 
-    {% endblock %}
+{% endblock %}
