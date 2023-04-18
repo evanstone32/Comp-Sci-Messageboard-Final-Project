@@ -8,6 +8,13 @@
   <h1 class="mb-5">Register Page</h1>
 </div>
 
+{% if error%}
+<div class="alert alert-danger" role="alert">
+  Passwords do not match
+</div>
+{% endif %}
+
+
 <div class="content">
   <form method='post' action='/profile'>
 
@@ -37,6 +44,7 @@
       <label for="passwordReenterInput" class="form-label">Re-Enter Password</label>
       <input type="password" class="form-control" id="passwordReenterInput" name="passwordReenter">
     </div>
+    <input hidden class="form-control" name="register">
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
@@ -44,6 +52,6 @@
 
 
 
-<a class='content' href="/">Go Back</a>
+
 
 {% endblock %}
