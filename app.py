@@ -67,7 +67,6 @@ def profile():
                                                request.form.get('lname'), request.form.get('email'), request.form.get('username'), users.get_new_user_num())
             logged_in_user.set_password(
                 password_handler.hash_password(request.form.get('password')))
-            print(logged_in_user.password)
             global logged_in
             logged_in = True
 
