@@ -1,6 +1,10 @@
 from flask import Flask, redirect, render_template, request
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    'mysql://root:GroupPass123@localhost:3306/Forum'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#db.init_app(app)
 
 @app.get('/')
 def index():
