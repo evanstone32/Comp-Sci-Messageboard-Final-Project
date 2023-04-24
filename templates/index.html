@@ -3,13 +3,12 @@
 {% block title %}Message Board App | Home{% endblock %}
 
 {% block body %}
-<html>
-<link href="style.css" rel="stylesheet">
-<h1 class="mb-5">Home</h1>
-<div style="width: 500px; height: 200px; margin-left: 20px; margin-top: 20px; font-size: large;">
-    Our site is a forum site for questions about the computer science field. We offer answers 
-    to many questions that recent computer science graduates may have. You may use the forums to chat and 
-    ask questions to others over the internet.</div>
+<div class='topical'>
+    <h1 class="mb-5">Message Board App</h1> 
+    <p class="mb-3">Our site is a forum site for questions about the computer science field. We offer answers to
+        many questions that recent computer science graduates may have. You may use the forums to chat and ask questions
+        to others over the internet.</p>
+</div>
 
 
 
@@ -36,4 +35,9 @@
 
     
 </html>
+{% endblock %}
+<div class="sign-log-btn">
+    <a href='/login' role='button' class='btn btn-primary btn-lg' id='login'>Login</a>
+    <a href='/register' role='button' class='btn btn-outline-primary btn-lg' id='signup'>Sign up</a>
+</div>
 {% endblock %}
