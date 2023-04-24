@@ -3,6 +3,11 @@ from src.repositories.user_repository import get_user_repository
 from src.PassHandler import PassHandler
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    'mysql://root:GroupPass123@localhost:3306/Forum'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#db.init_app(app)
+
 password_handler = PassHandler()
 
 global logged_in_user
