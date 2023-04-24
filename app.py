@@ -5,6 +5,20 @@ from src.PassHandler import PassHandler
 app = Flask(__name__)
 password_handler = PassHandler()
 
+global logged_in_user
+
+global logged_in
+logged_in = False
+
+
+users = get_user_repository()
+
+users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
+                  "Tlewyy", users.get_new_user_num())
+users.get_all_users()[0].set_password(
+    password_handler.hash_password('password'))
+
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
