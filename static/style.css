@@ -8,10 +8,14 @@
     text-align: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
-    font-size: larger;
+
     flex-flow: wrap;
 }
-
+h1.topical {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    /* font-size: xx-large; */
+}
 .btn-huge {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -40,8 +44,14 @@ div.sign-log-btn a {
 body {
     background-color: var(--grey);
 }
+div.content form button {
 
+    display: flex;
+    justify-content: center;
+
+}
 .bigButton {
-    width: 500px;
-    height: 500px;
+    width: 200px;
+    height: 200px;
+    background-color: #7749F8;
 }

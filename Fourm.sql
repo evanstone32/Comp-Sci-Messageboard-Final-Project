@@ -3,6 +3,7 @@ USE Forum;
 
 CREATE TABLE Users
 	(User_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    username varchar(50),
 	email varchar(50),
     pass varchar (50), 
     first_name varchar(50), 
