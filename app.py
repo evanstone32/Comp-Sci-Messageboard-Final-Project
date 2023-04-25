@@ -68,6 +68,9 @@ def profile():
                 return render_template('register.html', error="Passwords dont match")
 
             global logged_in_user
+            if len(user) > 1:
+                if request.form.get('password') != request.form.get('passwordReenter'):
+                    return render_template('register.html', error="Username Already Taken")
             logged_in_user = users.create_user(request.form.get('fname'),
                                                request.form.get('lname'), request.form.get('email'), request.form.get('username'), users.get_new_user_num(), password_handler.hash_password(request.form.get('password')))
 
@@ -77,12 +80,10 @@ def profile():
         else:
             # If user is Logging in
 
-            print(user)
-
-            if not password_handler.verify_password(request.form.get('password'), user.password):
+            if not password_handler.verify_password(request.form.get('password'), user[0].password):
                 return render_template('login.html', error="Password Invalid")
 
-            logged_in_user = user
+            logged_in_user = user[0]
             logged_in = True
 
     if not logged_in:
