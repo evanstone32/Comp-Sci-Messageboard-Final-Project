@@ -10,19 +10,19 @@ CREATE TABLE Users
     last_name varchar(50)
     );
     
+    CREATE TABLE Forum
+	(Forum_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    title varchar(20)
+    );
+    
 CREATE TABLE Post
 	(Post_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	post varchar(300),
     User_ID INT NOT NULL,
-	FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+    Forum_ID INT NOT NULL,
+	FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
+    FOREIGN KEY (Forum_ID) REFERENCES Forum(Forum_ID)
 	);
-    
-CREATE TABLE Forum
-	(Forum_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    title varchar(20),
-    Post_ID INT NOT NULL,
-    FOREIGN KEY (Post_ID) REFERENCES Post(Post_ID)
-    );
     
 CREATE TABLE Comments
 	(Comment_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

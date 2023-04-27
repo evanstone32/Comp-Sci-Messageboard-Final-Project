@@ -1,7 +1,8 @@
 from flask import Flask, redirect, render_template, request
 from src.repositories.user_repository import _user_repo as users
 from src.PassHandler import PassHandler
-from src.models.models import User, db
+from src.models.models import User, Forum, db
+from src.repositories.forum_repository import ForumRepository
 
 global logged_in_user
 global logged_in
@@ -10,7 +11,9 @@ password_handler = PassHandler()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'mysql://root:mynewpassword@localhost:3306/Forum'
+    'mysql://group:GroupPass123@localhost:3306/Forum'
+    #'mysql://root:mynewpassword@localhost:3306/Forum'
+    
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -45,7 +48,8 @@ def login():
 
 @app.get('/forum')
 def forum():
-    return render_template('forum.html')
+    forum = Forum.query.all()
+    return render_template('forum.html',forum=forum)
 
 
 @app.get('/register')

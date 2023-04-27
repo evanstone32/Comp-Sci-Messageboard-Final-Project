@@ -10,3 +10,8 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
+
+
+class Forum(db.Model):
+    forum_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
