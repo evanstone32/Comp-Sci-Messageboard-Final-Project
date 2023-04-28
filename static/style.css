@@ -56,3 +56,8 @@ div.content form button {
     height: 200px;
     background-color: #7749F8;
 }
+
+.postSpace {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

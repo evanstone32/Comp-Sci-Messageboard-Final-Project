@@ -98,9 +98,9 @@ def profile():
 
 @ app.get('/forum/<int:forum_id>/posts')
 def get_post(forum_id):
-    #posts = Post.get_all_posts(forum_id)
+    posts = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
     forum = Forum.query.get(forum_id) #not a method call yet
-    return render_template('post.html', forum=forum)
+    return render_template('post.html', forum=forum, posts=posts)
 
 
 @ app.post('/posts')

@@ -7,9 +7,26 @@
     <body>
         <a href="{{ url_for('forum', forum_id=forum.id) }}"></a>
         <h1 class="topical">{{forum.title}}</h1>
+
         <div class="d-grid gap-2" href="#">
             <button class="btn btn-primary" type="button" style="background-color: #7749F8;">Create post</button>
         </div>
+
+        
+        {%for post in posts%}
+        <div class="card postSpace">
+            <div class="card-header">
+              userID: {{post.user_id}}
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>{{post.post}}</p>
+              </blockquote>
+            </div>
+          </div>
+        {% endfor %}
+
+
 
 
 
