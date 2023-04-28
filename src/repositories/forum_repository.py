@@ -11,6 +11,9 @@ class ForumRepository:
 
     def get_all_forums(self):
         return Forum.query.all()
+    
+    def get_forum(self, forum_id):
+        return Forum.query.get(forum_id)
 
 
 _user_repo = ForumRepository()

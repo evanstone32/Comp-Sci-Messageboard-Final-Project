@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request
 from src.repositories.user_repository import _user_repo as users
 from src.PassHandler import PassHandler
-from src.models.models import User, Forum, db
+from src.models.models import User, Forum, Post, db
 from src.repositories.forum_repository import ForumRepository
 
 global logged_in_user
@@ -48,7 +48,7 @@ def login():
 
 @app.get('/forum')
 def forum():
-    forum = Forum.query.all()
+    forum = Forum.query.all() #not a method call yet
     return render_template('forum.html',forum=forum)
 
 
@@ -96,9 +96,11 @@ def profile():
     return render_template('profile.html', user=logged_in_user)
 
 
-@ app.get('/posts')
-def create_movies_form():
-    return render_template('posts.html')
+@ app.get('/forum/<int:forum_id>/posts')
+def get_post(forum_id):
+    #posts = Post.get_all_posts(forum_id)
+    forum = Forum.query.get(forum_id) #not a method call yet
+    return render_template('post.html', forum=forum)
 
 
 @ app.post('/posts')

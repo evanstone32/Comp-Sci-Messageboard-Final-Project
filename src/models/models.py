@@ -15,3 +15,9 @@ class User(db.Model):
 class Forum(db.Model):
     forum_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
+
+class Post(db.Model):
+    post_id = db.Column(db.Integer, primary_key=True)
+    post = db.Column(db.String(300), nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    forum_id = db.Column(db.Integer, nullable=False)
