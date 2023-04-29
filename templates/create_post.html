@@ -1,0 +1,17 @@
+{% extends '_layout.html' %}
+
+{% block title %}Movie Rating App | All Movies{% endblock %}
+
+{% block body %}
+
+{% if not session.get('user_id') %}
+    <p>You must be logged in to create a post.</p>
+{% else %}
+    <p>You are logged in as user ID {{ session['user_id'] }}</p>
+{% endif %}
+
+
+
+
+
+{% endblock %}

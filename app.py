@@ -103,6 +103,7 @@ def get_post(forum_id):
     return render_template('post.html', forum=forum, posts=posts)
 
 
-@ app.post('/posts')
-def create_movie():
-    return redirect('/posts')
+@ app.get('/forum/<int:forum_id>/posts/create_post')
+def create_post(forum_id):
+    
+    return render_template('create_post.html',forum_id=forum_id)
