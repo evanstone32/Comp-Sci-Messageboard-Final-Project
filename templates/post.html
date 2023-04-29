@@ -10,14 +10,14 @@
 
         <a href="{{ url_for('create_post', forum_id=forum.forum_id) }}">
         <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button" style="background-color: #7749F8;">Create post</button>
+            <button class="btn btn-primary" type="button" style="background-color: #7749F8;">Create post (must be logged in)</button>
         </div>
         </a>
         
-        {%for post in posts%}
+        {%for post in postss%}
         <div class="card postSpace">
             <div class="card-header">
-              userID: {{post.user_id}}
+              userID: {{post.user_id}}  {{post.post_id}}
             </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">

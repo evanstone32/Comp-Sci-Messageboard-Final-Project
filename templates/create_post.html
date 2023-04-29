@@ -4,14 +4,16 @@
 
 {% block body %}
 
-{% if not session.get('user_id') %}
-    <p>You must be logged in to create a post.</p>
-{% else %}
-    <p>You are logged in as user ID {{ session['user_id'] }}</p>
-{% endif %}
+<a href="{{ url_for('forum', forum_id=forum.forum_id) }}"></a>
+<h2 class="topical">What would you like to post in the {{forum.title}} forum</h2>
 
 
-
-
-
+<form method="post" action="{{ url_for('get_post', forum_id=forum.forum_id) }}">
+    <div class="mb-3">
+      <h1>Enter post below</h1>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" id="box" name="box"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <input hidden class="form-control" name="login">
+</form>
 {% endblock %}

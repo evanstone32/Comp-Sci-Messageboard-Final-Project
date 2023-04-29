@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, request
 from src.repositories.user_repository import _user_repo as users
 from src.PassHandler import PassHandler
 from src.models.models import User, Forum, Post, db
-from src.repositories.forum_repository import ForumRepository
+from src.repositories.post_repository import _post_repo as posts
 
 global logged_in_user
 global logged_in
@@ -19,8 +19,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
     db.create_all()
-    users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
-                      "Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
+   # users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
+                      #"Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
 
 
 # app = create_app()
@@ -96,14 +96,30 @@ def profile():
     return render_template('profile.html', user=logged_in_user)
 
 
-@ app.get('/forum/<int:forum_id>/posts')
+@ app.route('/forum/<int:forum_id>/posts',methods={'POST','GET'})
 def get_post(forum_id):
-    posts = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
+
+
+    new_post = request.form.get('box')
+    posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
+
+    postss = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
     forum = Forum.query.get(forum_id) #not a method call yet
-    return render_template('post.html', forum=forum, posts=posts)
+    return render_template('post.html', forum=forum, postss=postss)
 
 
-@ app.get('/forum/<int:forum_id>/posts/create_post')
+@ app.route('/forum/<int:forum_id>/posts/create_post',methods=['POST','GET'])
 def create_post(forum_id):
     
-    return render_template('create_post.html',forum_id=forum_id)
+
+    if not logged_in:
+        return redirect("/login")
+    
+    forum = Forum.query.get(forum_id)
+    if request.method == 'POST':
+        new_post = request.form.get('new_post')
+        posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
+        print(request.form)
+        return redirect('get_posts', forum_id=forum_id)
+
+    return render_template('create_post.html',forum=forum, logged_in_user=logged_in_user)
