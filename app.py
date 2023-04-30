@@ -100,8 +100,9 @@ def profile():
 def get_post(forum_id):
 
 
-    new_post = request.form.get('box')
-    posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
+    if request.method == 'POST':
+        new_post = request.form.get('box')
+        posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
 
     postss = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
     forum = Forum.query.get(forum_id) #not a method call yet
@@ -116,10 +117,5 @@ def create_post(forum_id):
         return redirect("/login")
     
     forum = Forum.query.get(forum_id)
-    if request.method == 'POST':
-        new_post = request.form.get('new_post')
-        posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
-        print(request.form)
-        return redirect('get_posts', forum_id=forum_id)
 
     return render_template('create_post.html',forum=forum, logged_in_user=logged_in_user)
