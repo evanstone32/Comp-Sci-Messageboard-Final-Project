@@ -61,3 +61,15 @@ div.content form button {
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.commentButton {
+    margin-top: 15px;
+    margin-left: 800px;
+    width: 200px;
+}
+
+.topical2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: left;
+    margin-top: 100px;
+}

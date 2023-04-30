@@ -21,3 +21,9 @@ class Post(db.Model):
     post = db.Column(db.String(300), nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
     forum_id = db.Column(db.Integer, nullable=False)
+
+class Comment(db.Model):
+    comment_id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(300), nullable=False)
+    post_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)

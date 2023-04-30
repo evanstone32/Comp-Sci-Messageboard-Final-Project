@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request
 from src.repositories.user_repository import _user_repo as users
 from src.PassHandler import PassHandler
-from src.models.models import User, Forum, Post, db
+from src.models.models import User, Forum, Post, Comment, db
 from src.repositories.post_repository import _post_repo as posts
 
 global logged_in_user
@@ -104,18 +104,27 @@ def get_post(forum_id):
         new_post = request.form.get('box')
         posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
 
-    postss = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
+    posts = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
     forum = Forum.query.get(forum_id) #not a method call yet
-    return render_template('post.html', forum=forum, postss=postss)
+    return render_template('post.html', forum=forum, posts=posts)
 
 
 @ app.route('/forum/<int:forum_id>/posts/create_post',methods=['POST','GET'])
 def create_post(forum_id):
     
-
     if not logged_in:
         return redirect("/login")
     
     forum = Forum.query.get(forum_id)
 
     return render_template('create_post.html',forum=forum, logged_in_user=logged_in_user)
+
+
+@ app.route('/forum/<int:forum_id>/posts/create_post/<int:post_id>/comments', methods=['GET','POST'])
+def get_comment(forum_id,post_id):
+
+    forum = Forum.query.get(forum_id)
+    comments = Comment.query.filter_by(post_id=post_id).all()
+    post = Post.query.get(post_id)
+
+    return render_template('comments.html', comments=comments, post=post, forum=forum)

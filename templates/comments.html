@@ -1,0 +1,41 @@
+{% extends '_layout.html' %}
+
+{% block title %}Movie Rating App | All Movies{% endblock %}
+
+{% block body %}
+<a href="{{ url_for('get_post', forum_id=forum.forum_id, post_id=post.post_id) }}"></a>
+
+
+<div class="card postSpace">
+    <div class="card-header">
+      <b>userID: {{post.user_id}} </b>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{post.post}}</p>
+      </blockquote>
+    </div>
+  </div>
+
+  <a href="{{ url_for('create_post', forum_id=forum.forum_id) }}">
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" style="background-color: #7749F8;">Comment (must be logged in)</button>
+    </div>
+    </a>
+
+    <h1 class="topical2" >Comments</h1>
+    {%for comments in comments%}
+          <div class="card postSpace">
+            <div class="card-header">
+              <b>userID: {{comments.user_id}} </b>
+              <a style="margin-left: 850px;" href="{{ url_for('get_comment', forum_id=forum.forum_id, post_id=post.post_id) }}">view comments</a>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>{{comments.comments}}</p>
+              </blockquote>
+            </div>
+          </div>
+    {% endfor %}
+
+{% endblock %}

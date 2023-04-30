@@ -14,10 +14,11 @@
         </div>
         </a>
         
-        {%for post in postss%}
+        {%for post in posts%}
         <div class="card postSpace">
             <div class="card-header">
-              userID: {{post.user_id}}  {{post.post_id}}
+              <b>userID: {{post.user_id}} </b>
+              <a style="margin-left: 850px;" href="{{ url_for('get_comment', forum_id=forum.forum_id, post_id=post.post_id) }}">view comments</a>
             </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
@@ -25,13 +26,9 @@
               </blockquote>
             </div>
           </div>
+
+
         {% endfor %}
-
-
-
-
-
-
 
 
 
