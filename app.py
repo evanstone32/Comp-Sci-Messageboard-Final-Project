@@ -3,7 +3,7 @@ from src.repositories.user_repository import _user_repo as users
 from src.PassHandler import PassHandler
 from src.models.models import User, Forum, Post, Comment, db
 from src.repositories.post_repository import _post_repo as posts
-from src.repositories.comment_repository import _comment_repo
+from src.repositories.comment_repository import _comment_repo as comment
 
 global logged_in_user
 global logged_in
@@ -127,7 +127,7 @@ def get_comment(forum_id,post_id):
 
     if request.method == 'POST':
         new_comment = request.form.get('text')
-        _comment_repo.create_new_comment(new_comment, post_id, logged_in_user.user_id)
+        comment.create_new_comment(new_comment, post_id, logged_in_user.user_id)
 
 
     forum = Forum.query.get(forum_id)

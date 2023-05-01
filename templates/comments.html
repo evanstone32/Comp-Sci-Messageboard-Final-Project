@@ -24,14 +24,14 @@
     </a>
 
     <h1 class="topical2" >Comments</h1>
-    {%for comments in comments%}
+    {%for comment in comments%}
           <div class="card postSpace">
             <div class="card-header">
-              <b>userID: {{comments.user_id}}  {{comments.user_id}}</b>
+              <b>userID: {{comment.user_id}}  {{comment.comment_id}}</b>
             </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
-                <p>{{comments.comments}}</p>
+                <p>{{comment.comment}}</p>
               </blockquote>
             </div>
           </div>
