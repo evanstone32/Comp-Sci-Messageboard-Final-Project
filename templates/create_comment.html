@@ -1,0 +1,18 @@
+{% extends '_layout.html' %}
+
+{% block title %}Movie Rating App | All Movies{% endblock %}
+
+{% block body %}
+
+<h2 class="topical">What would you like to comment</h2>
+
+
+<form method="post" action="{{ url_for('get_comment', forum_id=forum.forum_id, post_id=post.post_id) }}">
+    <div class="mb-3">
+      <h1>Enter comment below</h1>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="text"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <input hidden class="form-control" name="login">
+</form>
+{% endblock %}

@@ -3,6 +3,7 @@ from src.repositories.user_repository import _user_repo as users
 from src.PassHandler import PassHandler
 from src.models.models import User, Forum, Post, Comment, db
 from src.repositories.post_repository import _post_repo as posts
+from src.repositories.comment_repository import _comment_repo
 
 global logged_in_user
 global logged_in
@@ -96,7 +97,7 @@ def profile():
     return render_template('profile.html', user=logged_in_user)
 
 
-@ app.route('/forum/<int:forum_id>/posts',methods={'POST','GET'})
+@ app.route('/forum/<int:forum_id>/posts',methods=['POST','GET'])
 def get_post(forum_id):
 
 
@@ -104,9 +105,9 @@ def get_post(forum_id):
         new_post = request.form.get('box')
         posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
 
-    posts = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
+    post = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
     forum = Forum.query.get(forum_id) #not a method call yet
-    return render_template('post.html', forum=forum, posts=posts)
+    return render_template('post.html', forum=forum, post=post)
 
 
 @ app.route('/forum/<int:forum_id>/posts/create_post',methods=['POST','GET'])
@@ -120,11 +121,29 @@ def create_post(forum_id):
     return render_template('create_post.html',forum=forum, logged_in_user=logged_in_user)
 
 
-@ app.route('/forum/<int:forum_id>/posts/create_post/<int:post_id>/comments', methods=['GET','POST'])
+@ app.route('/forum/<int:forum_id>/posts/<int:post_id>/comments', methods=['POST','GET'])
 def get_comment(forum_id,post_id):
+
+
+    if request.method == 'POST':
+        new_comment = request.form.get('text')
+        _comment_repo.create_new_comment(new_comment, post_id, logged_in_user.user_id)
+
 
     forum = Forum.query.get(forum_id)
     comments = Comment.query.filter_by(post_id=post_id).all()
     post = Post.query.get(post_id)
 
     return render_template('comments.html', comments=comments, post=post, forum=forum)
+
+
+@ app.route('/forum/<int:forum_id>/posts/<int:post_id>/comments/create_comment', methods=['GET','POST'])
+def create_comment(forum_id,post_id):
+    
+    if not logged_in:
+        return redirect("/login")
+    
+    forum = Forum.query.get(forum_id)
+    post = Post.query.get(post_id)
+
+    return render_template('create_comment.html', forum=forum, post=post)

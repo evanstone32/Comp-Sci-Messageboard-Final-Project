@@ -5,8 +5,8 @@ class CommentRepository:
     
 #creates a comment in database
     def create_new_comment(self, comment: str, post_id: int, user_id: int) -> Comment:
-        comments = Comment(comment=comment, post_id=post_id, user_id=user_id)
-        db.session.add(comments)
+        com = Comment(comment=comment, post_id=post_id, user_id=user_id)
+        db.session.add(com)
         db.session.commit()
 
 #gets all comments at a specific forum_id
