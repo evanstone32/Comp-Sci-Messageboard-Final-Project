@@ -12,7 +12,7 @@ password_handler = PassHandler()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'mysql://group:GroupPass123@localhost:3306/Forum'
+    'mysql://root:password@localhost:3306/Forum'
     #'mysql://root:mynewpassword@localhost:3306/Forum'
     
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -20,8 +20,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
     db.create_all()
-   # users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
-                      #"Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
+    users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
+                    "Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
 
 
 # app = create_app()
@@ -73,11 +73,10 @@ def profile():
                 return render_template('register.html', error="Passwords dont match")
 
             global logged_in_user
-            if len(user) > 1:
-                if request.form.get('password') != request.form.get('passwordReenter'):
-                    return render_template('register.html', error="Username Already Taken")
+            if request.form.get('password') != request.form.get('passwordReenter'):
+                return render_template('register.html', error="Username Already Taken")
             logged_in_user = users.create_user(request.form.get('fname'),
-                                               request.form.get('lname'), request.form.get('email'), request.form.get('username'), users.get_new_user_num(), password_handler.hash_password(request.form.get('password')))
+                                            request.form.get('lname'), request.form.get('email'), request.form.get('username'), users.get_new_user_num(), password_handler.hash_password(request.form.get('password')))
 
             global logged_in
             logged_in = True
@@ -85,10 +84,12 @@ def profile():
         else:
             # If user is Logging in
 
-            if not password_handler.verify_password(request.form.get('password'), user[0].password):
+            print(user)
+
+            if not password_handler.verify_password(request.form.get('password'), user.password):
                 return render_template('login.html', error="Password Invalid")
 
-            logged_in_user = user[0]
+            logged_in_user = user
             logged_in = True
 
     if not logged_in:
