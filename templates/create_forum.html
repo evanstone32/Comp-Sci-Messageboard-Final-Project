@@ -1,0 +1,24 @@
+{% extends '_layout.html' %}
+
+{% block title %}Movie Rating App | All Movies{% endblock %}
+
+{% block body %}
+
+<a href="/forum"></a>
+<h2 class="topical">What would you like to name this forum</h2>
+
+
+<div class="content">
+  <form method="post" action="/forum">
+    <div class="mb-3">
+      <label for="forum-name" class="form-label">Forum Name</label>
+      <input type="forum-name" class="form-control" id="forum-name" name="forum-name">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <input hidden class="form-control" name="create-forum">
+  </form>
+
+
+</div>
+{% endblock %}

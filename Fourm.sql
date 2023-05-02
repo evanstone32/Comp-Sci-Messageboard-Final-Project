@@ -1,3 +1,4 @@
+DROP DATABASE `forum`;
 CREATE DATABASE Forum;
 USE Forum;
 
@@ -11,9 +12,9 @@ CREATE TABLE Users
     );
     
 CREATE TABLE Forum
-(Forum_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-title varchar(20)
-);
+    (Forum_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    title varchar(20)
+    );
     
 CREATE TABLE Post
 	(Post_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

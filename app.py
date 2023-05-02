@@ -4,6 +4,7 @@ from src.PassHandler import PassHandler
 from src.models.models import User, Forum, Post, Comment, db
 from src.repositories.post_repository import _post_repo as posts
 from src.repositories.comment_repository import _comment_repo as comment
+from src.repositories.forum_repository import _forum_repo as forums
 
 global logged_in_user
 global logged_in
@@ -20,14 +21,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 with app.app_context():
+    # db.session.query(Forum).delete()
+    # db.session.commit()
     db.create_all()
     users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
                     "Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
     
-    for
+    
 
 
-# app = create_app()
 logged_in = False
 
 
@@ -50,11 +52,21 @@ def login():
     return render_template('login.html')
 
 
-@app.get('/forum')
+@ app.route('/forum',methods=['POST','GET'])
 def forum():
-    forum = Forum.query.all() #not a method call yet
-    print(forum)
-    return render_template('forum.html',forum=forum)
+    if request.method == 'GET':
+        forum = forums.get_all_forums()
+        return render_template('forum.html',forum=forum)
+    if request.method == 'POST':
+        forums.create_forum(forums.get_new_forum_num(), request.form.get("forum-name"))
+        forum = forums.get_all_forums()
+        return render_template('forum.html',forum=forum)
+
+
+@app.get('/create_forum')
+def create_forum():
+    return render_template('create_forum.html')
+
 
 
 @app.get('/register')
