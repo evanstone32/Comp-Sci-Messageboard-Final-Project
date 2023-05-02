@@ -13,8 +13,8 @@ password_handler = PassHandler()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'mysql://group:GroupPass123@localhost:3306/Forum'
-    # 'mysql://root:password@localhost:3306/Forum'
+    'mysql://root:password@localhost:3306/Forum'
+    # 'mysql://group:GroupPass123@localhost:3306/Forum'
 
     
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -24,8 +24,8 @@ with app.app_context():
     # db.session.query(Forum).delete()
     # db.session.commit()
     db.create_all()
-    users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
-                    "Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
+    # users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
+    #                 "Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
     
     
 
@@ -100,8 +100,9 @@ def profile():
         else:
             # If user is Logging in
 
-            print(user)
-
+            # print(user)
+            if user is None:
+                return render_template('login.html', error="User does not exist")
             if not password_handler.verify_password(request.form.get('password'), user.password):
                 return render_template('login.html', error="Password Invalid")
 
@@ -120,7 +121,7 @@ def get_post(forum_id):
 
     if request.method == 'POST':
         new_post = request.form.get('box')
-        posts.create_new_post(new_post, forum_id, logged_in_user.user_id)
+        posts.create_new_post(posts.get_num_of_posts(forum_id) ,new_post, forum_id, logged_in_user.user_id)
 
     post = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
     forum = Forum.query.get(forum_id) #not a method call yet
