@@ -12,8 +12,9 @@ password_handler = PassHandler()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'mysql://root:password@localhost:3306/Forum'
-    #'mysql://root:mynewpassword@localhost:3306/Forum'
+    'mysql://group:GroupPass123@localhost:3306/Forum'
+    # 'mysql://root:password@localhost:3306/Forum'
+
     
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -22,6 +23,8 @@ with app.app_context():
     db.create_all()
     users.create_user("Todd", "Lewis", "Todd.Lewis@gmail.com",
                     "Tlewyy", users.get_new_user_num(), password_handler.hash_password('password'))
+    
+    for
 
 
 # app = create_app()
@@ -50,6 +53,7 @@ def login():
 @app.get('/forum')
 def forum():
     forum = Forum.query.all() #not a method call yet
+    print(forum)
     return render_template('forum.html',forum=forum)
 
 
