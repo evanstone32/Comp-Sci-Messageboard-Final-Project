@@ -1,6 +1,6 @@
 {% extends '_layout.html' %}
 
-{% block title %}Movie Rating App | All Movies{% endblock %}
+{% block title %}Message Board App | Posts{% endblock %}
 
 {% block body %}
 <html>
@@ -17,8 +17,8 @@
         {%for post in post%}
         <div class="card postSpace">
             <div class="card-header">
-              <b>userID: {{post.user_id}} </b>
-              <a style="margin-left: 850px;" href="{{ url_for('get_comment', forum_id=forum.forum_id, post_id=post.post_id) }}">view comments</a>
+              <b>Post Author: {{users.get_user_by_id(post.user_id).username}} </b>
+              <a style="margin-left: 75%;" href="{{ url_for('get_comment', forum_id=forum.forum_id, post_id=post.post_id) }}">view comments</a>
             </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">

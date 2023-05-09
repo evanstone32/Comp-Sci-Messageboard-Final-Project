@@ -11,6 +11,10 @@ class UserRepository:
     def get_user_by_username(self, username):
 
         return User.query.filter(User.username.like(f'%{username}%')).first()
+    
+    def get_user_by_id(self, user_id):
+
+        return User.query.filter(User.user_id.like(f'%{user_id}%')).first()
 
     def get_new_user_num(self):
         return len(User.query.all())+1

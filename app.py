@@ -49,6 +49,9 @@ def index():
 
 @app.get('/login')
 def login():
+    global logged_in
+    if logged_in:
+        return redirect("/")
     return render_template('login.html')
 
 
@@ -71,6 +74,9 @@ def create_forum():
 
 @app.get('/register')
 def register():
+    global logged_in
+    if logged_in:
+        return redirect("/")
     return render_template('register.html')
 
 
@@ -121,16 +127,16 @@ def get_post(forum_id):
 
     if request.method == 'POST':
         new_post = request.form.get('box')
-        posts.create_new_post(posts.get_num_of_posts(forum_id) ,new_post, forum_id, logged_in_user.user_id)
+        posts.create_new_post(posts.get_num_of_posts(forum_id), new_post, forum_id, logged_in_user.user_id)
 
     post = Post.query.filter_by(forum_id=forum_id).all()#not a method call yet
     forum = Forum.query.get(forum_id) #not a method call yet
-    return render_template('post.html', forum=forum, post=post)
+    return render_template('post.html', forum=forum, post=post, users=users)
 
 
 @ app.route('/forum/<int:forum_id>/posts/create_post',methods=['POST','GET'])
 def create_post(forum_id):
-    
+    global logged_in
     if not logged_in:
         return redirect("/login")
     
@@ -152,12 +158,13 @@ def get_comment(forum_id,post_id):
     comments = Comment.query.filter_by(post_id=post_id).all()
     post = Post.query.get(post_id)
 
-    return render_template('comments.html', comments=comments, post=post, forum=forum)
+    return render_template('comments.html', comments=comments, post=post, forum=forum,users=users)
 
 
 @ app.route('/forum/<int:forum_id>/posts/<int:post_id>/comments/create_comment', methods=['GET','POST'])
 def create_comment(forum_id,post_id):
     
+    global logged_in
     if not logged_in:
         return redirect("/login")
     
